@@ -24,21 +24,24 @@ const container: Variants = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 1,
-      delay: 1.5,
+      delayChildren: 1.5,
       staggerChildren: 0.5,
     },
   },
 };
 
 const item: Variants = {
-  inital: {
+  initial: {
     opacity: 0,
-    y: -5,
+    y: 50,
   },
   animate: {
     opacity: 1,
     y: 0,
+    transition: {
+      type: "spring",
+      duration: 2,
+    },
   },
 };
 
@@ -48,8 +51,8 @@ export default function Home() {
       <div className="h-full relative flex justify-center items-center">
         <motion.div
           variants={gojoAnimation}
-          animate="animate"
           initial="initial"
+          animate="animate"
         >
           <Image
             src="/images/gojo.png"
