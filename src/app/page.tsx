@@ -12,7 +12,8 @@ const gojoAnimation: Variants = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 1.5,
+      type: "spring",
+      duration: 1,
     },
   },
 };
@@ -24,7 +25,7 @@ const container: Variants = {
   animate: {
     opacity: 1,
     transition: {
-      delayChildren: 1.5,
+      delayChildren: 1,
       staggerChildren: 0.5,
     },
   },
