@@ -12,9 +12,26 @@ export default function Home() {
           alt="Gojo"
           className=""
         />
-        <span className="tracking-[0.5rem] text-center text-5xl font-bold bg-gradient-text bg-clip-text text-transparent absolute top-[calc(55%-3rem)]">
-          WhisperWire
-        </span>
+        <div className="absolute top-O h-full flex flex-col items-center justify-evenly">
+          <div className="invisible"></div>
+          <span className="tracking-[0.25rem] text-center text-5xl font-extrabold bg-gradient-text bg-clip-text text-transparent sm:text-6xl sm:tracking-[0.5rem] md:text-8xl  md:tracking-[1rem]">
+            WhisperWire
+          </span>
+          <div className="flex gap-5">
+            <Button
+              className="text-xl tracking-widest font-bold px-5"
+              size={"lg"}
+            >
+              Login
+            </Button>
+            <Button
+              className="text-xl tracking-widest font-bold px-5"
+              size={"lg"}
+            >
+              SignUp
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

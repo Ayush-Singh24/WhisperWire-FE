@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Advent_Pro } from "next/font/google";
+import { Albert_Sans } from "next/font/google";
 import "./globals.css";
 
-const adventPro = Advent_Pro({ subsets: ["latin"] });
+const albertSans = Albert_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "WhispeWire",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={adventPro.className}>{children}</body>
+      <body className={albertSans.className}>{children}</body>
     </html>
   );
 }
