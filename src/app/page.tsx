@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Variants, motion } from "framer-motion";
+import Link from "next/link";
 
 const gojoAnimation: Variants = {
   initial: {
@@ -79,16 +80,18 @@ export default function Home() {
           </motion.span>
           <motion.div variants={item} className="flex gap-5 sm:gap-7 md:gap-10">
             <Button
+              asChild
               className="text-xl tracking-widest font-bold px-5"
               size={"lg"}
             >
-              Login
+              <Link href={"/login"}>Login</Link>
             </Button>
             <Button
+              asChild
               className="text-xl tracking-widest font-bold px-5"
               size={"lg"}
             >
-              SignUp
+              <Link href={"/signup"}>SignUp</Link>
             </Button>
           </motion.div>
         </motion.div>
