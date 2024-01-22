@@ -1,3 +1,7 @@
 export default function Login() {
-  return <div>Hello world!</div>;
+  return (
+    <section className="h-full max-w-[1550px] justify-center items-center">
+      <div className="text-primary-text ">Hello world!</div>
+    </section>
+  );
 }
