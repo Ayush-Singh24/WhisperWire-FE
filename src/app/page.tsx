@@ -91,7 +91,7 @@ export default function Home() {
               className="text-xl tracking-widest font-bold px-5"
               size={"lg"}
             >
-              <Link href={"/signup"}>SignUp</Link>
+              <Link href={"/signup"}>Sign Up</Link>
             </Button>
           </motion.div>
         </motion.div>
