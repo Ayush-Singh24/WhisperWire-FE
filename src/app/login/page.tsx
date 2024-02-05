@@ -82,7 +82,9 @@ export default function Login() {
           </form>
         </Form>
         <div className="text-center">
-          <Link href="/">Go back</Link>
+          <Link href="/" className="underline underline-offset-4">
+            Go back
+          </Link>
         </div>
       </div>
     </section>
