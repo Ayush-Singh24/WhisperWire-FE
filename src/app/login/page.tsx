@@ -14,19 +14,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { loginSchema } from "@/schemas";
+import { LoginSchema } from "@/schemas";
+import { login } from "@/actions/login";
+import { useTransition } from "react";
 
 export default function Login() {
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const [isPending, setTransition] = useTransition();
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setTransition(() => {
+      login(values);
+    });
   };
 
   return (
@@ -41,7 +46,11 @@ export default function Login() {
                 <FormItem>
                   <FormLabel className="text-3xl">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter email" {...field} />
+                    <Input
+                      placeholder="Enter email"
+                      disabled={isPending}
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -61,6 +70,7 @@ export default function Login() {
                       placeholder="Enter password"
                       {...field}
                       type="password"
+                      disabled={isPending}
                     />
                   </FormControl>
                   <FormDescription>
@@ -70,7 +80,9 @@ export default function Login() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={isPending}>
+              Login
+            </Button>
           </form>
         </Form>
         <div className="text-center">

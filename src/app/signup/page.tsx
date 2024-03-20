@@ -14,10 +14,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { signUpSchema } from "@/schemas";
+import { SignUpSchema } from "@/schemas";
 export default function SignUp() {
-  const form = useForm<z.infer<typeof signUpSchema>>({
-    resolver: zodResolver(signUpSchema),
+  const form = useForm<z.infer<typeof SignUpSchema>>({
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
       username: "",
       email: "",
@@ -26,7 +26,7 @@ export default function SignUp() {
     },
   });
 
-  const onSubmit = (value: z.infer<typeof signUpSchema>) => {
+  const onSubmit = (value: z.infer<typeof SignUpSchema>) => {
     console.log(value);
   };
 
