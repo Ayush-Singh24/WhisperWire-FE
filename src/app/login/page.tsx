@@ -20,7 +20,7 @@ export default function Login() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -31,17 +31,17 @@ export default function Login() {
 
   return (
     <section className="h-full max-w-[1550px] flex flex-col justify-center items-center">
-      <div className="text-primary-text w-full p-5 flex flex-col gap-5">
+      <div className="text-primary-text w-full p-5 flex flex-col gap-5 bg-primary-color-dark border-2 border-primary-color-light max-w-[500px] rounded-3xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-3xl">Username</FormLabel>
+                  <FormLabel className="text-3xl">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter username" {...field} />
+                    <Input placeholder="Enter email" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
