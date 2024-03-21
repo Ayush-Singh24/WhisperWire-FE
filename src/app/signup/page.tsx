@@ -15,11 +15,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { SignUpSchema } from "@/schemas";
+import { useTransition } from "react";
+import { signup } from "@/actions/signup";
 export default function SignUp() {
+  const [isPending, setTransition] = useTransition();
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
       passwordConfirm: "",
@@ -27,7 +30,9 @@ export default function SignUp() {
   });
 
   const onSubmit = (value: z.infer<typeof SignUpSchema>) => {
-    console.log(value);
+    setTransition(() => {
+      signup(value);
+    });
   };
 
   return (
@@ -37,14 +42,12 @@ export default function SignUp() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-2xl md:text-3xl">
-                    Username
-                  </FormLabel>
+                  <FormLabel className="text-2xl md:text-3xl">Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter username" {...field} />
+                    <Input placeholder="Enter your name" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
