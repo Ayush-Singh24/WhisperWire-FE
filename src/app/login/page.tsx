@@ -33,9 +33,11 @@ export default function Login() {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setTransition(() => {
       login(values).then((data) => {
-        toast({
-          description: data.message,
-        });
+        if (data) {
+          toast({
+            description: data.message,
+          });
+        }
       });
     });
   };
