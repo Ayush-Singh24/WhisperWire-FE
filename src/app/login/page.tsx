@@ -17,9 +17,11 @@ import Link from "next/link";
 import { LoginSchema } from "@/schemas";
 import { login } from "@/actions/login";
 import { useTransition } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Login() {
   const [isPending, setTransition] = useTransition();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -30,7 +32,11 @@ export default function Login() {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setTransition(() => {
-      login(values);
+      login(values).then((data) => {
+        toast({
+          description: data.message,
+        });
+      });
     });
   };
 

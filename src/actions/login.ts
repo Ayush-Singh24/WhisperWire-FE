@@ -9,7 +9,7 @@ import { z } from "zod";
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validateFields = LoginSchema.safeParse(values);
   if (!validateFields.success) {
-    return { error: "Invalid Fields!" };
+    return { message: "Invalid Fields!" };
   }
 
   const { email, password } = validateFields.data;
@@ -20,13 +20,14 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
+    return { message: "Logged In!" };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
+          return { message: "Invalid credentials!" };
         default:
-          return { error: "Something went wrong!" };
+          return { message: "Something went wrong!" };
       }
     }
     throw error;
