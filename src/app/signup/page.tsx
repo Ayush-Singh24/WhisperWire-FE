@@ -37,7 +37,7 @@ export default function SignUp() {
 
   return (
     <section className="h-full max-w-[1550px] flex flex-col justify-center items-center">
-      <div className="text-primary-text w-full p-10 flex flex-col gap-5 rounded-3xl bg-primary-color-dark border-2 border-primary-color-light max-w-[500px] overflow-y-scroll">
+      <div className="text-primary-text w-full p-10 flex flex-col gap-5 rounded-3xl bg-primary-color-dark border-2 border-primary-color-light max-w-[500px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
