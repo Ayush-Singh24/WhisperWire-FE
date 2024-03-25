@@ -13,7 +13,7 @@ export default function Social() {
   return (
     <div className="flex gap-2">
       <Button variant={"ghost"} onClick={() => onClick("google")}>
-        <Image src="/images/google.png" alt="google" width={30} height={30} />{" "}
+        <Image src="/images/google.png" alt="google" width={30} height={30} />
       </Button>
       <Button variant={"ghost"} onClick={() => onClick("github")}>
         <Image src="/images/github.png" alt="github" width={30} height={30} />
