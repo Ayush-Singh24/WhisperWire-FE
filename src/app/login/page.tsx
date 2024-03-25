@@ -18,6 +18,7 @@ import { LoginSchema } from "@/schemas";
 import { login } from "@/actions/login";
 import { useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import Social from "@/components/social";
 
 export default function Login() {
   const [isPending, setTransition] = useTransition();
@@ -88,9 +89,12 @@ export default function Login() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isPending}>
-              Login
-            </Button>
+            <div className="flex justify-between items-center">
+              <Button type="submit" disabled={isPending}>
+                Login
+              </Button>
+              <Social />
+            </div>
           </form>
         </Form>
         <div className="text-center">
