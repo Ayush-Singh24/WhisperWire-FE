@@ -11,7 +11,7 @@ export default function Social() {
     });
   };
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-3">
       <Button variant={"ghost"} onClick={() => onClick("google")}>
         <Image src="/images/google.png" alt="google" width={30} height={30} />
       </Button>
