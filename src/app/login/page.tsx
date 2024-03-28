@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { LoginSchema } from "@/schemas";
 import { login } from "@/actions/login";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useSearchParams } from "next/navigation";
 import Social from "@/components/social";
@@ -25,7 +25,6 @@ export default function Login() {
   const [isPending, setTransition] = useTransition();
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider."
