@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { BeatLoader } from "react-spinners";
-import { redirect, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { newVerification } from "@/actions/new-verification";
 
