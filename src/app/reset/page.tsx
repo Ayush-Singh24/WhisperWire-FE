@@ -14,49 +14,31 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { LoginSchema } from "@/schemas";
+import { ResetSchema } from "@/schemas";
 import { login } from "@/actions/login";
-import { useEffect, useTransition } from "react";
+import { useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useSearchParams } from "next/navigation";
-import Social from "@/components/social";
 
-export default function Login() {
+export default function ResetPage() {
   const [isPending, setTransition] = useTransition();
   const { toast } = useToast();
-  const searchParams = useSearchParams();
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email already in use with different provider."
-      : "";
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof ResetSchema>>({
+    resolver: zodResolver(ResetSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  useEffect(() => {
-    if (urlError) {
-      setTimeout(() => {
-        toast({
-          description: urlError,
-        });
-      }, 10);
-    }
-  }, [toast]);
-
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    setTransition(() => {
-      login(values).then((data) => {
-        if (data) {
-          toast({
-            description: data.message,
-          });
-        }
-      });
-    });
+  const onSubmit = (values: z.infer<typeof ResetSchema>) => {
+    // setTransition(() => {
+    //   login(values).then((data) => {
+    //     if (data) {
+    //       toast({
+    //         description: data.message,
+    //       });
+    //     }
+    //   });
+    // });
   };
 
   return (
@@ -84,35 +66,10 @@ export default function Login() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-3xl">Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter password"
-                      {...field}
-                      type="password"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Set a password for your account.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Link href="/reset" className="underline underline-offset-4">
-              forgot password?
-            </Link>
             <div className="flex justify-between items-center">
               <Button type="submit" disabled={isPending}>
-                Login
+                Send reset email
               </Button>
-              <Social />
             </div>
           </form>
         </Form>
