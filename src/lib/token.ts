@@ -44,4 +44,6 @@ export const generatePasswordResetToken = async (email: string) => {
       expires,
     },
   });
+
+  return passwordResetToken;
 };
