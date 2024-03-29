@@ -2,6 +2,7 @@ import z from "zod";
 export const ResetSchema = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
 });
+
 export const LoginSchema = z.object({
   email: z.string({ required_error: "Email is required." }).email(),
   password: z.string().min(1, { message: "Password is required" }),
@@ -29,3 +30,20 @@ export const SignUpSchema = z
       path: ["passwordConfirm"],
     }
   );
+
+export const NewPasswordSchema = z
+  .object({
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters long",
+    }),
+    passwordConfirm: z.string(),
+  })
+  .refine((data) => {
+    return (
+      (data.password = data.passwordConfirm),
+      {
+        message: "Passwords do not match.",
+        path: ["passwordConfirm"],
+      }
+    );
+  });
