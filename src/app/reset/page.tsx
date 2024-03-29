@@ -15,9 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { ResetSchema } from "@/schemas";
-import { login } from "@/actions/login";
 import { useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { reset } from "@/actions/reset";
 
 export default function ResetPage() {
   const [isPending, setTransition] = useTransition();
@@ -30,15 +30,15 @@ export default function ResetPage() {
   });
 
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
-    // setTransition(() => {
-    //   login(values).then((data) => {
-    //     if (data) {
-    //       toast({
-    //         description: data.message,
-    //       });
-    //     }
-    //   });
-    // });
+    setTransition(() => {
+      reset(values).then((data) => {
+        if (data) {
+          toast({
+            description: data.message,
+          });
+        }
+      });
+    });
   };
 
   return (
