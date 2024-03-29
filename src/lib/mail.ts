@@ -7,7 +7,7 @@ export const sendVerificationMail = async (email: string, token: string) => {
   await resend.emails.send({
     from: "onboarding@resend.dev",
     to: email,
-    subject: "Confirm your email for Whisperwire",
+    subject: "Confirm your email for Whisperwire.",
     html: `<p>Click <a href="${confirmLink}">here</a> to confirm your email.</p>`,
   });
 };
@@ -18,7 +18,7 @@ export const sendPasswordResetMail = async (email: string, token: string) => {
   await resend.emails.send({
     from: "onboarding@resend.dev",
     to: email,
-    subject: "Reset your password for ",
+    subject: "Reset your password for whisperwire account.",
     html: `<p>Click <a href="${resetLink}">here</a> to reset your email.</p>`,
   });
 };
