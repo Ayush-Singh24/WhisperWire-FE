@@ -17,11 +17,14 @@ import Link from "next/link";
 import { NewPasswordSchema } from "@/schemas";
 import { useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { reset } from "@/actions/reset";
+import { redirect, useSearchParams } from "next/navigation";
+import { newPassword } from "@/actions/new-password";
 
 export default function NewPasswordPage() {
   const [isPending, setTransition] = useTransition();
   const { toast } = useToast();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
   const form = useForm<z.infer<typeof NewPasswordSchema>>({
     resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
@@ -31,15 +34,15 @@ export default function NewPasswordPage() {
   });
 
   const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
-    // setTransition(() => {
-    //   reset(values).then((data) => {
-    //     if (data) {
-    //       toast({
-    //         description: data.message,
-    //       });
-    //     }
-    //   });
-    // });
+    setTransition(() => {
+      newPassword(values, token).then((data) => {
+        if (data) {
+          toast({
+            description: data.message,
+          });
+        }
+      });
+    });
   };
 
   return (
@@ -85,7 +88,7 @@ export default function NewPasswordPage() {
             />
             <div className="flex justify-between items-center">
               <Button type="submit" disabled={isPending}>
-                Change password
+                Reset password
               </Button>
             </div>
           </form>
