@@ -126,8 +126,8 @@ export default function SignUp() {
           </form>
         </Form>
         <div className="text-center">
-          <Link href="/" className="underline underline-offset-4">
-            Go back
+          <Link href="/login" className="underline underline-offset-4">
+            Already have an account?
           </Link>
         </div>
       </div>

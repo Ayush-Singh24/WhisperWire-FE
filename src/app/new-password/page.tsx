@@ -94,8 +94,8 @@ export default function NewPasswordPage() {
           </form>
         </Form>
         <div className="text-center">
-          <Link href="/" className="underline underline-offset-4">
-            Go back
+          <Link href="/login" className="underline underline-offset-4">
+            Go back to login
           </Link>
         </div>
       </div>
