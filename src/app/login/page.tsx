@@ -24,6 +24,7 @@ import Social from "@/components/social";
 export default function Login() {
   const [isPending, setTransition] = useTransition();
   const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false);
+  const [code, setCode] = useState<string>("");
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const urlError =
@@ -47,7 +48,7 @@ export default function Login() {
         });
       }, 10);
     }
-  }, [toast]);
+  }, [toast, code]);
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setTransition(() => {
@@ -86,6 +87,9 @@ export default function Login() {
                         className="text-2xl"
                         disabled={isPending}
                         {...field}
+                        onChangeCapture={(e) =>
+                          setCode((e.target as HTMLInputElement).value)
+                        }
                       />
                     </FormControl>
                     <FormMessage />
@@ -142,7 +146,10 @@ export default function Login() {
               </>
             )}
             <div className="flex justify-between items-center">
-              <Button type="submit" disabled={isPending}>
+              <Button
+                type={code.length === 0 && showTwoFactor ? "button" : "submit"}
+                disabled={isPending || (code.length === 0 && showTwoFactor)}
+              >
                 Login
               </Button>
               <Social />
