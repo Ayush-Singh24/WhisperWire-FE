@@ -2,8 +2,8 @@
 
 import { signIn } from "@/auth";
 import { getUserByEmail } from "@/data/user";
-import { sendVerificationMail } from "@/lib/mail";
-import { generateVerficationToken } from "@/lib/token";
+import { sendTwoFactorTokenEmail, sendVerificationMail } from "@/lib/mail";
+import { generateTwoFactorToken, generateVerficationToken } from "@/lib/token";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/schemas";
 import { AuthError } from "next-auth";
@@ -31,6 +31,14 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return {
       message: "You need to verify your email. Verification email sent!",
     };
+  }
+
+  if (existingUser.isTwoFactorEnabled && existingUser.email) {
+    const twoFactorToken = await generateTwoFactorToken(existingUser.email);
+
+    await sendTwoFactorTokenEmail(twoFactorToken.email, twoFactorToken.token);
+
+    return { twoFactor: true, message: "2FA code sent to your mail!" };
   }
 
   try {
