@@ -35,6 +35,7 @@ export default function Login() {
     defaultValues: {
       email: "",
       password: "",
+      code: "",
     },
   });
 
@@ -81,6 +82,8 @@ export default function Login() {
                     <FormControl>
                       <Input
                         placeholder="123456"
+                        type="number"
+                        className="text-2xl"
                         disabled={isPending}
                         {...field}
                       />
