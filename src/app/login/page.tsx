@@ -44,6 +44,7 @@ export default function Login() {
     if (urlError) {
       setTimeout(() => {
         toast({
+          title: "Yowai Mo!",
           description: urlError,
         });
       }, 10);
