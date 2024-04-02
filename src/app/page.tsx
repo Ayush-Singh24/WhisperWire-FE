@@ -61,7 +61,7 @@ export default function Home() {
             height={400}
             width={500}
             alt="Gojo"
-            className=""
+            className="noselect"
             priority={true}
           />
         </motion.div>
@@ -74,7 +74,7 @@ export default function Home() {
           <div className="invisible"></div>
           <motion.span
             variants={item}
-            className="tracking-[0.25rem] text-center text-5xl font-extrabold bg-gradient-text bg-clip-text text-transparent sm:text-6xl sm:tracking-[0.5rem] md:text-8xl  md:tracking-[1rem]"
+            className="tracking-[0.25rem] text-center text-5xl font-extrabold bg-gradient-text bg-clip-text text-transparent sm:text-6xl sm:tracking-[0.5rem] md:text-8xl  md:tracking-[1rem] noselect"
           >
             WhisperWire
           </motion.span>
