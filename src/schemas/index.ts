@@ -48,3 +48,9 @@ export const NewPasswordSchema = z
       }
     );
   });
+
+export const FriendRequestSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required." })
+    .email("Enter an email."),
+});
