@@ -3,12 +3,12 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { LogOut, PlusIcon, UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useSession, signOut } from "next-auth/react";
 import { logout } from "@/actions/logout";
 import { useRouter } from "next/navigation";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export default function Sidebar() {
-  const { data: session } = useSession();
+  const user = useCurrentUser();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -47,16 +47,14 @@ export default function Sidebar() {
       <section className="flex-1">Friends list</section>
       <div className="flex gap-3 items-center self-center">
         <Avatar>
-          <AvatarImage src={session?.user?.image ? session?.user?.image : ""} />
-          <AvatarFallback>
-            {session?.user?.name ? session?.user?.name[0] : "X"}
-          </AvatarFallback>
+          <AvatarImage src={user?.image || ""} />
+          <AvatarFallback>{user?.name ? user.name[0] : "X"}</AvatarFallback>
         </Avatar>
         <div className="max-h-36 overflow-hidden">
-          <h1>{session?.user?.name}</h1>
-          <h2>{session?.user?.email}</h2>
+          <h1>{user?.name}</h1>
+          <h2>{user?.email}</h2>
         </div>
-        <Button variant={"ghost"} onClick={handleLogout}>
+        <Button variant={"ghost"} onClick={handleLogout} className="py-7">
           <LogOut />
         </Button>
       </div>
