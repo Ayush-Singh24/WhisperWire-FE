@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { LogOut, PlusIcon, UserRound } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { logout } from "@/actions/logout";
+import { PlusIcon, UserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import UserInfoBadge from "./UserInfoBadge";
