@@ -6,15 +6,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { logout } from "@/actions/logout";
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import UserInfoBadge from "./UserInfoBadge";
 
 export default function Sidebar() {
-  const user = useCurrentUser();
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await logout();
-    router.push("/login");
-  };
   return (
     <main className="w-1/4 h-full p-10 border-r-2 border-r-primary-color-light text-white flex flex-col gap-5">
       <div className="flex flex-col">
@@ -45,19 +41,7 @@ export default function Sidebar() {
         </Button>
       </div>
       <section className="flex-1">Friends list</section>
-      <div className="flex gap-3 items-center self-center">
-        <Avatar>
-          <AvatarImage src={user?.image || ""} />
-          <AvatarFallback>{user?.name ? user.name[0] : "X"}</AvatarFallback>
-        </Avatar>
-        <div className="max-h-36 overflow-hidden">
-          <h1>{user?.name}</h1>
-          <h2>{user?.email}</h2>
-        </div>
-        <Button variant={"ghost"} onClick={handleLogout} className="py-7">
-          <LogOut />
-        </Button>
-      </div>
+      <UserInfoBadge />
     </main>
   );
 }
