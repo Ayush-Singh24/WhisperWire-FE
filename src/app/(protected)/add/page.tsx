@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { FriendRequestSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserRoundPlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 export default function AddFriend() {
@@ -41,12 +42,15 @@ export default function AddFriend() {
                 <FormLabel className="text-5xl">Add a friend</FormLabel>
                 <div>
                   <FormControl>
-                    <div className="flex gap-5 w-full">
+                    <div className="flex gap-5 w-full items-center">
                       <Input
+                        className="text-xl p-8"
                         placeholder="Enter your friend's email."
                         {...field}
                       />
-                      <Button type="submit">Add</Button>
+                      <Button type="submit" className="text-3xl py-8">
+                        <UserRoundPlus />
+                      </Button>
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -59,3 +63,4 @@ export default function AddFriend() {
     </section>
   );
 }
+//TODO: search friends
