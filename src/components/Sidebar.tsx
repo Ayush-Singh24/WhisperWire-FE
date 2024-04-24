@@ -2,12 +2,11 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { PlusIcon, UserRound } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import UserInfoBadge from "./UserInfoBadge";
 
 export default function Sidebar() {
-  const router = useRouter();
+  const user = useCurrentUser();
 
   return (
     <main className="w-1/4 h-full p-10 border-r-2 border-r-primary-color-light text-white flex flex-col gap-5">
