@@ -1,24 +1,19 @@
-import { signOut } from "@/auth";
-import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
+import Sidebar from "@/components/Sidebar";
+import { SessionProvider } from "next-auth/react";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
   return (
-    <section className="w-screen h-screen flex">
-      <div className="w-1/4 p-10 border-r-2 border-r-primary-color-light">
-        <form
-          action={async () => {
-            "use server";
-            await signOut();
-          }}
-        >
-          <Button type="submit">Log out</Button>
-        </form>
-      </div>
-      <div className="w-3/4 p-10">{children}</div>
-    </section>
+    <SessionProvider session={session}>
+      <section className="w-screen h-screen flex">
+        <Sidebar />
+        <div className="w-3/4 p-10">{children}</div>
+      </section>
+    </SessionProvider>
   );
 }
