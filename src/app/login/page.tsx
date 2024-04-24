@@ -49,7 +49,7 @@ export default function Login() {
         });
       }, 10);
     }
-  }, [toast, code]);
+  }, [toast, code, urlError]);
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setTransition(() => {
@@ -159,7 +159,7 @@ export default function Login() {
         </Form>
         <div className="text-center">
           <Link href="/signup" className="underline underline-offset-4">
-            Don't have an account?
+            Don&apos;t have an account?
           </Link>
         </div>
       </div>
