@@ -17,6 +17,11 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+
+  conversations Conversation[]
+
+  seenMessages Message[] @relation("Seen")
+  messages     Message[]
 }
 
 model Account {
@@ -69,4 +74,30 @@ model TwoFactorConfirmation {
   id     String @id @default(cuid())
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Conversation {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+  name          String?
+  isGroup       Boolean?
+
+  messages Message[]
+
+  users User[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  body      String?
+  image     String?
+  createdAt DateTime @default(now())
+
+  seen User[] @relation("Seen")
+
+  conversations Conversation[]
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
 }
