@@ -9,7 +9,7 @@ export default function Sidebar() {
   const user = useCurrentUser();
 
   return (
-    <main className="w-1/4 h-full p-10 border-r-2 border-r-primary-color-light text-white flex flex-col gap-5">
+    <main className="hidden md:flex w-1/4 h-full p-10 border-r-2 border-r-primary-color-light text-white flex-col gap-5">
       <div className="flex flex-col">
         <Button
           asChild
