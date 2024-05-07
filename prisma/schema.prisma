@@ -20,8 +20,10 @@ model User {
 
   conversations Conversation[]
 
-  seenMessages Message[] @relation("Seen")
-  messages     Message[]
+  seenMessages     Message[]        @relation("Seen")
+  messages         Message[]
+  receivedRequests FriendRequests[]
+  sentRequests     FriendRequests[] @relation("Sent")
 }
 
 model Account {
@@ -100,4 +102,12 @@ model Message {
 
   senderId String
   sender   User   @relation(fields: [senderId], references: [id])
+}
+
+model FriendRequests {
+  id         String @id @default(cuid())
+  receiverId String
+  receiver   User   @relation(fields: [receiverId], references: [id])
+  senderId   String
+  sender     User   @relation("Sent", fields: [senderId], references: [id])
 }
