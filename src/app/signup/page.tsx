@@ -18,7 +18,7 @@ import { SignUpSchema } from "@/schemas";
 import { useTransition } from "react";
 import { signup } from "@/actions/signup";
 import { useToast } from "@/components/ui/use-toast";
-import Social from "@/components/social";
+import Social from "@/components/Social";
 export default function SignUp() {
   const [isPending, setTransition] = useTransition();
   const { toast } = useToast();

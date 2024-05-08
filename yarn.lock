@@ -768,15 +768,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "@prisma/client@npm:5.11.0"
+"@prisma/client@npm:^5.13.0":
+  version: 5.13.0
+  resolution: "@prisma/client@npm:5.13.0"
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 10c0/4c314e5b9d0ae880cd048cfa224a017d5d044a850efadf189e02937abc09a24de764d62738cea7016c8af31dfa18069d5a0f7c4ac99a0b6e454987d5c3afbbfe
+  checksum: 10c0/19a0d08237fd7bae6009417476dc3588df77102131e3c8df01a024e5dee78417a8079d5a3dbbb3ffee7b4117067a9c10912f5084a3a40884de8fde5314fb1227
   languageName: node
   linkType: hard
 
@@ -2937,7 +2937,7 @@ __metadata:
   dependencies:
     "@auth/prisma-adapter": "npm:^1.5.0"
     "@hookform/resolvers": "npm:^3.3.4"
-    "@prisma/client": "npm:^5.11.0"
+    "@prisma/client": "npm:^5.13.0"
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-label": "npm:^2.0.2"
     "@radix-ui/react-slot": "npm:^1.0.2"

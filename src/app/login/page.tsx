@@ -19,7 +19,7 @@ import { login } from "@/actions/login";
 import { useEffect, useState, useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useSearchParams } from "next/navigation";
-import Social from "@/components/social";
+import Social from "@/components/Social";
 
 export default function Login() {
   const [isPending, setTransition] = useTransition();
