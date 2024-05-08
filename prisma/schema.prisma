@@ -110,4 +110,6 @@ model FriendRequests {
   receiver   User   @relation(fields: [receiverId], references: [id])
   senderId   String
   sender     User   @relation("Sent", fields: [senderId], references: [id])
+
+  @@unique([senderId, receiverId])
 }
