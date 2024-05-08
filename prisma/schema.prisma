@@ -20,10 +20,14 @@ model User {
 
   conversations Conversation[]
 
-  seenMessages     Message[]        @relation("Seen")
-  messages         Message[]
+  seenMessages Message[] @relation("Seen")
+  messages     Message[]
+
   receivedRequests FriendRequests[]
   sentRequests     FriendRequests[] @relation("Sent")
+
+  friends         User[] @relation("Friends")
+  friendsRelation User[] @relation("Friends")
 }
 
 model Account {
