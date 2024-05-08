@@ -3,6 +3,7 @@
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
 import { FriendRequestSchema } from "@/schemas";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 export const sendFriendReq = async (
@@ -17,6 +18,8 @@ export const sendFriendReq = async (
   const { email } = validateFields.data;
 
   const receiver = await getUserByEmail(email);
+  if (receiver?.id === senderId)
+    return { message: "You can't add yourself as friend!" };
   if (!receiver) {
     return { message: "User doesn't exist!" };
   }
@@ -28,5 +31,6 @@ export const sendFriendReq = async (
     },
   });
 
+  revalidatePath("/requests");
   return { message: "Request sent!" };
 };

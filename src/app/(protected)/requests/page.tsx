@@ -17,9 +17,11 @@ export default async function Requests() {
             return (
               <FriendReq
                 key={request.senderId}
+                senderId={request.senderId}
                 name={request.senderName}
                 image={request.senderImage}
                 email={request.senderEmail}
+                receiverId={user.id ? user.id : ""}
               />
             );
           })}
