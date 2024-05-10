@@ -24,7 +24,7 @@ export const sendFriendReq = async (
     return { message: "User doesn't exist!" };
   }
 
-  await db.friendRequests.create({
+  await db.friendRequest.create({
     data: {
       senderId,
       receiverId: receiver.id,

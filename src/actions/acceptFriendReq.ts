@@ -20,12 +20,12 @@ export const acceptFriendReq = async (receiverId: string, senderId: string) => {
   //   where: { id: user.id },
   //   data: {
   //     friends: {
-  //       upsert: sender,
+  //       set: [...user.friends, sender],
   //     },
   //   },
   // });
 
-  await db.friendRequests.delete({
+  await db.friendRequest.delete({
     where: {
       senderId_receiverId: { senderId: sender.id, receiverId: user.id },
     },
