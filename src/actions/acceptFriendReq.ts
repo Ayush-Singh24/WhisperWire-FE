@@ -1,22 +1,17 @@
 "use server";
 
+import { getUserById } from "@/data/user";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export const acceptFriendReq = async (receiverId: string, senderId: string) => {
-  const receiver = await db.user.findUnique({
-    where: { id: receiverId },
-    select: { id: true, friends: true },
-  });
+  const receiver = await getUserById(receiverId);
+
   if (!receiver) {
     return { message: "User not found!" };
   }
-  const sender = await db.user.findUnique({
-    where: { id: senderId },
-    include: {
-      friends: true,
-    },
-  });
+
+  const sender = await getUserById(senderId);
 
   if (!sender) {
     return { message: "Sender not found!" };
