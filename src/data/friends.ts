@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { getUserById } from "./user";
 
-export const getFriendRequests = async (id: string) => {
+export const getAllReceivedFriendRequests = async (id: string) => {
   const user = await db.user.findUnique({
     where: { id },
     include: { receivedRequests: true },
@@ -23,4 +23,28 @@ export const getFriendRequests = async (id: string) => {
   );
 
   return requests;
+};
+
+export const getFriendRequest = async (
+  receiverId: string,
+  senderId: string
+) => {
+  const request = await db.friendRequest.findUnique({
+    where: { senderId_receiverId: { senderId, receiverId } },
+  });
+
+  return request;
+};
+
+export const getFriend = async (senderId: string, friendId: string) => {
+  const sender = await db.user.findUnique({
+    where: { id: senderId },
+    include: {
+      friends: true,
+    },
+  });
+
+  const friend = sender?.friends.find((f) => f.id === friendId);
+
+  return friend;
 };

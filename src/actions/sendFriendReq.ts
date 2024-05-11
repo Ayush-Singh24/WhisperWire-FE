@@ -1,5 +1,6 @@
 "use server";
 
+import { getFriend, getFriendRequest } from "@/data/friends";
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
 import { FriendRequestSchema } from "@/schemas";
@@ -22,6 +23,17 @@ export const sendFriendReq = async (
     return { message: "You can't add yourself as friend!" };
   if (!receiver) {
     return { message: "User doesn't exist!" };
+  }
+
+  const existingRequest = await getFriendRequest(receiver.id, senderId);
+
+  if (existingRequest) {
+    return { message: "You have already sent a request to this user!" };
+  }
+
+  const alreadyAnFriend = await getFriend(senderId, receiver.id);
+  if (alreadyAnFriend) {
+    return { message: "This user is already your friend!" };
   }
 
   await db.friendRequest.create({
