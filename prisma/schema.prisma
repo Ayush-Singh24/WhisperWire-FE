@@ -26,8 +26,6 @@ model User {
   receivedRequests FriendRequest[]
   sentRequests     FriendRequest[] @relation("Sent")
 
-  // friends Friend[]
-
   friends         User[] @relation("Friends")
   friendsRelation User[] @relation("Friends")
 }
