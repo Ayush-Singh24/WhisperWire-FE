@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { useTransition } from "react";
 import { acceptFriendReq } from "@/actions/acceptFriendReq";
+import { rejectFriendReq } from "@/actions/rejectFriendReq";
 
 export default function FriendReq({
   name,
@@ -26,7 +27,13 @@ export default function FriendReq({
       });
     });
   };
-  const remove = async () => {};
+  const remove = async () => {
+    setTransition(() => {
+      rejectFriendReq(receiverId, senderId).then((data) => {
+        console.log(data);
+      });
+    });
+  };
   return (
     <div className="flex items-center w-full bg-primary-color-light p-2 rounded">
       <div className="flex gap-2 items-center mr-auto">
