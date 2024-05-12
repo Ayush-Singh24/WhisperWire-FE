@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { FriendRequestSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { acceptFriendReq } from "./acceptFriendReq";
 
 export const sendFriendReq = async (
   senderId: string,
@@ -25,10 +26,23 @@ export const sendFriendReq = async (
     return { message: "User doesn't exist!" };
   }
 
-  const existingRequest = await getFriendRequest(receiver.id, senderId);
+  const existingRequestFromSender = await getFriendRequest(
+    receiver.id,
+    senderId
+  );
 
-  if (existingRequest) {
+  if (existingRequestFromSender) {
     return { message: "You have already sent a request to this user!" };
+  }
+
+  const existingRequestFromReceiver = await getFriendRequest(
+    senderId,
+    receiver.id
+  );
+
+  if (existingRequestFromReceiver) {
+    const response = await acceptFriendReq(senderId, receiver.id);
+    return { message: response.message };
   }
 
   const alreadyAnFriend = await getFriend(senderId, receiver.id);
