@@ -9,7 +9,7 @@ export default async function Requests() {
   const friendRequests = await getAllReceivedFriendRequests(user.id);
   return (
     <main className="text-white flex flex-col gap-10 max-w-full">
-      <h1 className="text-3xl">Friend Requests</h1>
+      <h1 className="text-3xl font-medium">Friend Requests</h1>
       <div className="flex flex-col gap-5 md:w-1/2">
         {friendRequests &&
           friendRequests.map((request) => {
@@ -22,6 +22,7 @@ export default async function Requests() {
                 image={request.senderImage}
                 email={request.senderEmail}
                 receiverId={user.id ? user.id : ""}
+                disableAdd={false}
               />
             );
           })}

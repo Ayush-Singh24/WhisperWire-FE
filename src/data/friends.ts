@@ -25,6 +25,28 @@ export const getAllReceivedFriendRequests = async (id: string) => {
   return requests;
 };
 
+export const getAllSentFriendRequests = async (id: string) => {
+  const user = await db.user.findUnique({
+    where: { id },
+    include: { sentRequests: true },
+  });
+  if (!user) return;
+  const requests = await Promise.all(
+    user.sentRequests.map(async (request) => {
+      const receiver = await getUserById(request.receiverId);
+      if (!receiver) return;
+      return {
+        receiverName: receiver?.name ? receiver.name : "",
+        receiverEmail: receiver?.email ? receiver.email : "",
+        receiverImage: receiver?.image ? receiver.image : "",
+        receiverId: receiver?.id,
+      };
+    })
+  );
+
+  return requests;
+};
+
 export const getFriendRequest = async (
   receiverId: string,
   senderId: string

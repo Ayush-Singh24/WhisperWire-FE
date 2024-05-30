@@ -1,5 +1,5 @@
 "use client";
-import { Check, Cross, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { useTransition } from "react";
@@ -12,12 +12,14 @@ export default function FriendReq({
   image,
   receiverId,
   senderId,
+  disableAdd,
 }: {
   name: string;
   email: string;
   image: string;
   receiverId: string;
   senderId: string;
+  disableAdd: boolean;
 }) {
   const [isPending, setTransition] = useTransition();
   const add = async () => {
@@ -47,10 +49,21 @@ export default function FriendReq({
         </div>
       </div>
       <div className="flex gap-2">
-        <Button variant={"outline"} size={"sm"} onClick={add}>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          onClick={add}
+          disabled={isPending}
+          className={`${disableAdd ? "hidden" : ""}`}
+        >
           <Check />
         </Button>
-        <Button variant={"outline"} size={"sm"} onClick={remove}>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          onClick={remove}
+          disabled={isPending}
+        >
           <X />
         </Button>
       </div>
