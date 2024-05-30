@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FriendRequestSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,11 +29,13 @@ export default function AddFriend() {
     },
   });
 
+  const { toast } = useToast();
+
   const onSubmit = (values: z.infer<typeof FriendRequestSchema>) => {
     setTransition(() => {
       if (user && user.id) {
         sendFriendReq(user.id, values).then((data) => {
-          console.log(data);
+          toast({ description: data.message });
         });
       }
     });
@@ -59,7 +61,11 @@ export default function AddFriend() {
                         placeholder="Enter your friend's email."
                         {...field}
                       />
-                      <Button type="submit" className="text-3xl py-8">
+                      <Button
+                        type="submit"
+                        className="text-3xl py-8"
+                        disabled={isPending}
+                      >
                         <UserRoundPlus />
                       </Button>
                     </div>
