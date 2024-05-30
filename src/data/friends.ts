@@ -70,3 +70,19 @@ export const getFriend = async (senderId: string, friendId: string) => {
 
   return friend;
 };
+
+export const getAllFriends = async (userId: string) => {
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    include: { friends: true },
+  });
+
+  if (!user) return;
+
+  const friends = user.friends.map((friend) => {
+    const { emailVerified, isTwoFactorEnabled, password, ...data } = friend;
+    return data;
+  });
+
+  return friends;
+};

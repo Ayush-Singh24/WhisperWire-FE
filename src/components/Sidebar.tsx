@@ -1,8 +1,8 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { PlusIcon, UserRound } from "lucide-react";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import UserInfoBadge from "./UserInfoBadge";
+import { FriendList } from "./FriendsList";
 
 export default function Sidebar() {
   return (
@@ -34,7 +34,7 @@ export default function Sidebar() {
           </Link>
         </Button>
       </div>
-      <section className="flex-1">Friends list</section>
+      <FriendList />
       <UserInfoBadge />
     </main>
   );
