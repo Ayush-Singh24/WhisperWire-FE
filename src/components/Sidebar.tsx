@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { PlusIcon, UserRound } from "lucide-react";
@@ -6,8 +5,6 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import UserInfoBadge from "./UserInfoBadge";
 
 export default function Sidebar() {
-  const user = useCurrentUser();
-
   return (
     <main className="hidden md:flex w-1/4 h-full p-10 border-r-2 border-r-primary-color-light text-white flex-col gap-5">
       <div className="flex flex-col">

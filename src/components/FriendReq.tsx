@@ -23,6 +23,7 @@ export default function FriendReq({
 }) {
   const [isPending, setTransition] = useTransition();
   const add = async () => {
+    if (disableAdd) return;
     setTransition(() => {
       acceptFriendReq(receiverId, senderId).then((data) => {
         console.log(data);
