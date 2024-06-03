@@ -1,8 +1,5 @@
-import { auth, signOut } from "@/auth";
+import EmptyState from "@/components/EmptyState";
 
 export default async function Home() {
-  const session = await auth();
-  return (
-    <div className="w-full bg-orange-500 p-10">{JSON.stringify(session)}</div>
-  );
+  return <EmptyState />;
 }

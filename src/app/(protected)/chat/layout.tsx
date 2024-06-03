@@ -1,0 +1,7 @@
+export default async function ChatLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="h-full w-full bg-orange-400">{children}</div>;
+}

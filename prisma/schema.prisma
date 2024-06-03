@@ -18,7 +18,8 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  conversations Conversation[]
+  receiver Conversation[] @relation("Receiver")
+  sender   Conversation[] @relation("Sender")
 
   seenMessages Message[] @relation("Seen")
   messages     Message[]
@@ -86,12 +87,17 @@ model Conversation {
   id            String   @id @default(cuid())
   createdAt     DateTime @default(now())
   lastMessageAt DateTime @default(now())
-  name          String?
-  isGroup       Boolean?
+  // name          String?
+  // isGroup       Boolean?
 
   messages Message[]
 
-  users User[]
+  receiverId String
+  receiver   User   @relation("Receiver", fields: [receiverId], references: [id])
+  senderId   String
+  sender     User   @relation("Sender", fields: [senderId], references: [id])
+
+  @@unique([senderId, receiverId])
 }
 
 model Message {
