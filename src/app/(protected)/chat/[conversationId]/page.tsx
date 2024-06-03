@@ -19,7 +19,7 @@ export default async function ConversationId({ params }: { params: IParams }) {
   return (
     <main className="flex flex-col h-full">
       <ConversationHeader conversation={conversation} />
-      <ConversationBody />
+      <ConversationBody initialMessages={messages} />
       <ChatForm />
     </main>
   );
