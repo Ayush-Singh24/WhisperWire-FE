@@ -7,7 +7,7 @@ export default async function Friends() {
   if (!user || !user.id) return;
   const friends = await getAllFriends(user.id);
   return (
-    <main className="text-white flex flex-col gap-10 max-w-full">
+    <main className="text-white flex flex-col gap-10 max-w-full p-10">
       <h1 className="text-3xl font-medium">Friends</h1>
       <div className="flex flex-col gap-2 w-1/2">
         {friends &&

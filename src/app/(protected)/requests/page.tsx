@@ -8,7 +8,7 @@ export default async function Requests() {
   if (!user || !user.id) return;
   const friendRequests = await getAllReceivedFriendRequests(user.id);
   return (
-    <main className="text-white flex flex-col gap-10 max-w-full">
+    <main className="text-white flex flex-col gap-10 max-w-full p-10">
       <h1 className="text-3xl font-medium">Friend Requests</h1>
       <div className="flex flex-col gap-5 md:w-1/2">
         {friendRequests &&

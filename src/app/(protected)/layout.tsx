@@ -13,7 +13,7 @@ export default async function DashboardLayout({
     <SessionProvider session={session}>
       <section className="w-screen h-screen flex max-w-[1540px]">
         <Sidebar />
-        <div className="w-3/4 p-10 flex-1">{children}</div>
+        <div className="w-3/4 flex-1">{children}</div>
         <Toaster />
       </section>
     </SessionProvider>

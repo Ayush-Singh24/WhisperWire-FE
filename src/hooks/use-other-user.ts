@@ -1,8 +1,11 @@
 import { FullConversationType } from "@/types";
 import { useCurrentUser } from "./use-current-user";
 import { useMemo } from "react";
+import { Conversation, User } from "@prisma/client";
 
-const useOtherUser = (conversation: FullConversationType) => {
+const useOtherUser = (
+  conversation: Conversation & { sender: User; receiver: User }
+) => {
   const user = useCurrentUser();
 
   const otherUser = useMemo(() => {

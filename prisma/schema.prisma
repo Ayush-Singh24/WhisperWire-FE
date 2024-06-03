@@ -108,7 +108,8 @@ model Message {
 
   seen User[] @relation("Seen")
 
-  conversations Conversation[]
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
 
   senderId String
   sender   User   @relation(fields: [senderId], references: [id])

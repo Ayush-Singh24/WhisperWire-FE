@@ -40,3 +40,25 @@ export const getConversation = async () => {
     return [];
   }
 };
+
+export const getConversationById = async (id: string) => {
+  try {
+    const currentUser = await getCurrentUser();
+
+    if (!currentUser?.email) {
+      return null;
+    }
+
+    const conversation = await db.conversation.findUnique({
+      where: { id },
+      include: {
+        sender: true,
+        receiver: true,
+      },
+    });
+
+    return conversation;
+  } catch (e) {
+    return null;
+  }
+};
