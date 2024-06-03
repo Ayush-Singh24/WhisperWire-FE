@@ -5,8 +5,7 @@ import { Conversation, User } from "@prisma/client";
 import { useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { Menu } from "lucide-react";
 
 interface ConversationHeaderProps {
   conversation: Conversation & {
@@ -34,10 +33,8 @@ export default function ConversationHeader({
         <span>{otherUser?.name}</span>
         <span className="text-sm text-secondary-text">{statusText}</span>
       </div>
-      <Button asChild variant={"ghost"} className="flex justify-start text-xl">
-        <Link href={"/friends"}>
-          <ChevronLeft />
-        </Link>
+      <Button variant={"ghost"} className="flex justify-start text-xl">
+        <Menu />
       </Button>
     </div>
   );

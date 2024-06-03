@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import FriendInfoBadge from "@/components/FrinedInfoBadge";
+import FriendInfoBadge from "@/components/FriendInfoBadge";
 import { getAllFriends } from "@/data/friends";
 export default async function Friends() {
   const session = await auth();

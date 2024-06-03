@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { getAllFriends } from "@/data/friends";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import FriendInfoBadge from "./FrinedInfoBadge";
+import FriendInfoBadge from "./FriendInfoBadge";
 
 export async function FriendList() {
   const session = await auth();

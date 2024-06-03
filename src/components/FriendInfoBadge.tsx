@@ -22,6 +22,9 @@ export default function FriendInfoBadge({
     fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({ receiverUserId: id }),
+      headers: {
+        "Content-type": "application/json",
+      },
     })
       .then(async (response) => {
         const data = (await response.json()) as any;
