@@ -34,7 +34,7 @@ export default function MessageBox({ data, isLast }: MessageBoxProps) {
       <div className={avatar}>
         <Avatar>
           <AvatarImage src={data.sender.image || ""} />
-          <AvatarFallback>
+          <AvatarFallback className="text-primary-text">
             {data.sender.name ? data.sender.name[0] : "X"}
           </AvatarFallback>
         </Avatar>

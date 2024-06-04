@@ -41,18 +41,8 @@ export default function ChatForm() {
     });
   };
   return (
-    <div className="w-full border-t-2 p-4 px-10 border-primary-color-light">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex gap-2 items-center"
-      >
-        <MessageInput
-          id="message"
-          register={register}
-          errors={errors}
-          required
-          placeholder="Write a message here!"
-        />
+    <>
+      <div className="w-full flex items-center gap-2 border-t-2 p-4 px-10 border-primary-color-light">
         <CldUploadButton
           options={{ maxFiles: 1 }}
           onSuccess={handleUpload}
@@ -61,10 +51,22 @@ export default function ChatForm() {
         >
           <Paperclip />
         </CldUploadButton>
-        <Button variant={"ghost"} className="text-primary-text" type="submit">
-          <Send />
-        </Button>
-      </form>
-    </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex gap-2 items-center flex-1"
+        >
+          <MessageInput
+            id="message"
+            register={register}
+            errors={errors}
+            required
+            placeholder="Write a message here!"
+          />
+          <Button variant={"ghost"} className="text-primary-text" type="submit">
+            <Send />
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
