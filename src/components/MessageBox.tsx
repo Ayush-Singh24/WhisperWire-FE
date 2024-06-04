@@ -6,7 +6,8 @@ import clsx from "clsx";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { format } from "date-fns";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ImageModal from "./ImageModal";
 
 interface MessageBoxProps {
   data: FullMessageType;
@@ -14,6 +15,7 @@ interface MessageBoxProps {
 }
 export default function MessageBox({ data, isLast }: MessageBoxProps) {
   const currentUser = useCurrentUser();
+  const [isImageModalOpen, setIsImageModalOpen] = useState<boolean>(false);
   const isOwn = currentUser?.id === data.senderId;
   const seenList = (data.seen || [])
     .filter((user) => currentUser?.id !== user.id)
@@ -49,8 +51,14 @@ export default function MessageBox({ data, isLast }: MessageBoxProps) {
       </div>
       <div>
         <div className={message}>
+          <ImageModal
+            src={data.image}
+            isOpen={isImageModalOpen}
+            onClose={() => setIsImageModalOpen(false)}
+          />
           {data.image ? (
             <Image
+              onClick={() => setIsImageModalOpen(true)}
               alt="image"
               height="288"
               width="288"
