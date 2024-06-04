@@ -1,5 +1,8 @@
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getUserById } from "@/data/user";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
+import { update } from "lodash";
 import { NextResponse } from "next/server";
 interface IParams {
   conversationId: string;
@@ -40,6 +43,19 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       return NextResponse.json(existingConversation);
     }
 
+    // const sender = await getUserById(lastMessage.senderId);
+    // lastMessage.seen = [...lastMessage.seen, currentUser];
+    // const newLastMessage = {
+    //   ...lastMessage,
+    //   sender: sender,
+    // };
+
+    // await pusherServer.trigger(
+    //   conversationId,
+    //   "message:update",
+    //   newLastMessage
+    // );
+
     const updatedMessage = await db.message.update({
       where: {
         id: lastMessage.id,
@@ -56,6 +72,17 @@ export async function POST(request: Request, { params }: { params: IParams }) {
         sender: true,
       },
     });
+
+    await pusherServer.trigger(currentUser.id, "conversation:update", {
+      id: conversationId,
+      messages: [updatedMessage],
+    });
+
+    await pusherServer.trigger(
+      conversationId,
+      "message:update",
+      updatedMessage
+    );
 
     return NextResponse.json(updatedMessage);
   } catch (error) {

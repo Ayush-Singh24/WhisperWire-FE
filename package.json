@@ -24,6 +24,7 @@
     "date-fns": "^3.6.0",
     "framer-motion": "^10.18.0",
     "init": "^0.1.2",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.312.0",
     "next": "^14.2.2",
     "next-auth": "^5.0.0-beta.16",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2",
+    "@types/lodash": "^4.17.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

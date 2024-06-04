@@ -1,5 +1,8 @@
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
+import { FullMessageType } from "@/types";
+import { uniqueId } from "lodash";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -12,8 +15,22 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized!", { status: 401 });
     }
 
+    const newMsg = {
+      id: uniqueId(""),
+      body: message,
+      image: image,
+      senderId: currentUser.id,
+      conversationId: conversationId,
+      sender: currentUser,
+      seen: [currentUser],
+      createdAt: new Date(),
+    };
+
+    await pusherServer.trigger(conversationId, "messages:new", newMsg);
+
     const newMessage = await db.message.create({
       data: {
+        id: newMsg.id,
         body: message,
         image: image,
         conversationId: conversationId,
@@ -49,6 +66,21 @@ export async function POST(request: Request) {
           },
         },
       },
+    });
+
+    const userIds = [
+      updatedConversation.senderId,
+      updatedConversation.receiverId,
+    ];
+
+    const lastMessage =
+      updatedConversation.messages[updatedConversation.messages.length - 1];
+
+    userIds.map((userId) => {
+      pusherServer.trigger(userId!, "conversation:update", {
+        id: conversationId,
+        messages: [lastMessage],
+      });
     });
 
     return NextResponse.json(newMessage);
