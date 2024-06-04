@@ -2,6 +2,7 @@
 import { useCallback, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useRouter } from "next/navigation";
+import LoadingModal from "./LoadingModal";
 
 export default function FriendInfoBadge({
   name,
@@ -34,24 +35,27 @@ export default function FriendInfoBadge({
   }, [id, router]);
 
   return (
-    <div
-      key={id}
-      className="flex gap-2  p-2 items-center rounded-full bg-primary-color-med border-2 border-primary-color-light hover:bg-primary-color-light cursor-pointer"
-      onClick={handleClick}
-    >
-      <Avatar>
-        <AvatarImage src={image || ""} />
-        <AvatarFallback>{name ? name[0] : "X"}</AvatarFallback>
-      </Avatar>
-      <div className="flex flex-col gap-1">
-        <span>{name}</span>
-        <span
-          className="text-xysrn dev
+    <>
+      {isLoading && <LoadingModal />}
+      <div
+        key={id}
+        className="flex gap-2  p-2 items-center rounded-full bg-primary-color-med border-2 border-primary-color-light hover:bg-primary-color-light cursor-pointer"
+        onClick={handleClick}
+      >
+        <Avatar>
+          <AvatarImage src={image || ""} />
+          <AvatarFallback>{name ? name[0] : "X"}</AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col gap-1">
+          <span>{name}</span>
+          <span
+            className="text-xysrn dev
         "
-        >
-          {email}
-        </span>
+          >
+            {email}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
